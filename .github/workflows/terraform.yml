@@ -42,9 +42,8 @@ jobs:
       with:
           azcliversion: 2.30.0
           inlineScript: |
-            pwd
-            echo $GITHUB_WORKSPACE
-            chmod +x $GITHUB_WORKSPACE/*.tf
+            $GITHUB_WORKSPACE="/home/runner/work/TerraformActions/"
+            chmod +x $GITHUB_WORKSPACE/*.sh
             $GITHUB_WORKSPACE/RGforTFSTATE.sh
             $GITHUB_WORKSPACE/STAforTFSTATE.sh
             $GITHUB_WORKSPACE/CONforTFSTATE.sh
