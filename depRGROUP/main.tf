@@ -9,7 +9,10 @@ terraform {
   
   # Configuración de Backend
  backend "azurerm" {
-
+    resource_group_name  = var.staGroupName
+    storage_account_name = var.staName
+    container_name       = var.contName
+    key                  = var.keyName
  }
   required_version = ">= 1.1.0"
 }
@@ -21,10 +24,8 @@ provider "azurerm" {
 
 # Módulo Grupo de recursos.
 module "mod_rgroup" {
-    source = "git::https://dev.azure.com/stemdo/sandbox/_git/ags.tf.module.rgroup"
+    source = "../modRGROUP"
 
-    for_each = var.rgroup_map
-
-    rgroup = each.value.rgroup
-    location = each.value.location
+    rgroup = var.groupNAME
+    location = var.groupLocation
 }
