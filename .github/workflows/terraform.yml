@@ -1,0 +1,82 @@
+name: Terraform Full VM Deployment
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+    permissions:
+      id-token: write
+      
+    # AZ CLI install.
+    steps:
+    - name: Install azure-cli
+      run: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+    
+    # Azure SP login with secrets.
+    - name: Az Login
+      uses: azure/login@v1
+      with:
+          creds: '{"clientId":"${{ secrets.CLIENT_ID }}","clientSecret":"${{ secrets.CLIENT_SCRT }}","subscriptionId":"${{ secrets.SUB_ID }}","tenantId":"${{ secrets.TEN_ID }}"}'
+    
+    # Checkout
+    - name: Checkout
+      uses: actions/checkout@v3.5.3
+      
+          # STA for Terraform TFSTATE
+    - name: Azure CLI script file
+      uses: azure/CLI@v1
+      with:
+          azcliversion: 2.30.0
+          inlineScript: |
+            ls -l $GITHUB_WORKSPACE
+            chmod +x $GITHUB_WORKSPACE/*.sh
+            $GITHUB_WORKSPACE/RGforTFSTATE.sh
+            $GITHUB_WORKSPACE/STAforTFSTATE.sh
+            $GITHUB_WORKSPACE/CONTforTFSTATE.sh
+      
+    # Token Replacer Action
+    - name: Replace Tokens
+      uses: cschleiden/replace-tokens@v1
+      with:
+        tokenPrefix: '__'
+        tokenSuffix: '__'
+        files: '["**/*.tf"]'
+      env:
+      # Vars to replace key: value
+        groupName: agonzalez
+        groupLocation: westeurope
+#         nicName: nic1
+#         nsgName: nsg1
+#         pubIP: pubip1
+#         ruleAccessType: Allow
+#         ruleDestPort: 22
+#         ruleDestPrefix: '"*"'
+#         ruleDirection: INBOUND
+#         ruleName: SSHRule
+#         rulePriority: 101
+#         ruleProtocol: TCP
+#         ruleSourcePort: '"*"'
+#         ruleSourcePrefix: '"*"'
+#         sshKeyName: SSHKey
+#         subnetAddress: 10.0.0.0/24
+#         vnetAddress: 10.0.0.0/16
+#         subnetName: subnet1
+#         vnetName: vnet1
+#         vmName: vm1
+#         vmImage: UbuntuLTS
+      
+
