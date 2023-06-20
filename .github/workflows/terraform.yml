@@ -78,6 +78,8 @@ jobs:
 #         vmName: vm1
 #         vmImage: UbuntuLTS
 
+
+    ###  WORK IN PROGRESS  ###
     - name: 'Terraform Init'
       uses: hashicorp/terraform-github-actions@master
       with:
