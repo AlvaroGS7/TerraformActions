@@ -42,7 +42,6 @@ jobs:
       with:
           azcliversion: 2.30.0
           inlineScript: |
-            ls -l $GITHUB_WORKSPACE
             chmod +x $GITHUB_WORKSPACE/*.sh
             $GITHUB_WORKSPACE/RGforTFSTATE.sh
             $GITHUB_WORKSPACE/STAforTFSTATE.sh
