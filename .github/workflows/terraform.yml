@@ -43,9 +43,9 @@ jobs:
           azcliversion: 2.30.0
           inlineScript: |
             chmod +x ./*.sh
-            ./RGforTFSTATE.sh
-            ./STAforTFSTATE.sh
-            ./CONforTFSTATE.sh
+            $GITHUB_WORKSPACE/../RGforTFSTATE.sh
+            $GITHUB_WORKSPACE/../STAforTFSTATE.sh
+            $GITHUB_WORKSPACE/../CONforTFSTATE.sh
       
     # Token Replacer Action
     - name: Replace Tokens
