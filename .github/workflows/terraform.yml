@@ -42,11 +42,11 @@ jobs:
       with:
           azcliversion: 2.30.0
           inlineScript: |
-            ls -l /home/runner/work/TerraformActions/
-            chmod +x /home/runner/work/TerraformActions/*.sh
-            /home/runner/work/TerraformActions/RGforTFSTATE.sh
-            /home/runner/work/TerraformActions/STAforTFSTATE.sh
-            /home/runner/work/TerraformActions/CONforTFSTATE.sh
+            ls -l /home/runner/work/TerraformActions/TerraformActions
+            chmod +x /home/runner/work/TerraformActions/TerraformActions/*.sh
+            /home/runner/work/TerraformActions/TerraformActions/RGforTFSTATE.sh
+            /home/runner/work/TerraformActions/TerraformActions/STAforTFSTATE.sh
+            /home/runner/work/TerraformActions/TerraformActions/CONforTFSTATE.sh
       
     # Token Replacer Action
     - name: Replace Tokens
