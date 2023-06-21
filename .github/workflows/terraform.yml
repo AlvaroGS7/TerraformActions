@@ -33,8 +33,8 @@ jobs:
 #           creds: '{"clientId":"${{ secrets.CLIENT_ID }}","clientSecret":"${{ secrets.CLIENT_SCRT }}","subscriptionId":"${{ secrets.SUB_ID }}","tenantId":"${{ secrets.TEN_ID }}"}'
     
     # Azure login for SP.
-    - name: Terraform SP Login
-      run: az login --service-principal -u ${{ secrets.CLIENT_ID }} -p ${{ secrets.CLIENT_SCRT }} --tenant ${{ secrets.TEN_ID }}
+    - name: Terraform User Login
+      run: az login -u ${{ secrets.user }} -p ${{ secrets.passwd }}
     
     # Checkout
     - name: Checkout
@@ -47,38 +47,6 @@ jobs:
         $GITHUB_WORKSPACE/RGforTFSTATE.sh
         $GITHUB_WORKSPACE/STAforTFSTATE.sh
         $GITHUB_WORKSPACE/CONTforTFSTATE.sh
-        ls -l $GITHUB_WORKSPACE/depRGROUP/
-      
-    # Token Replacer Action
-    - name: Replace Tokens
-      uses: cschleiden/replace-tokens@v1
-      with:
-        tokenPrefix: '__'
-        tokenSuffix: '__'
-        files: '["**/*.tf"]'
-      env:
-      # Vars to replace key: value
-        groupName: agonzalez
-        groupLocation: westeurope
-#         nicName: nic1
-#         nsgName: nsg1
-#         pubIP: pubip1
-#         ruleAccessType: Allow
-#         ruleDestPort: 22
-#         ruleDestPrefix: '"*"'
-#         ruleDirection: INBOUND
-#         ruleName: SSHRule
-#         rulePriority: 101
-#         ruleProtocol: TCP
-#         ruleSourcePort: '"*"'
-#         ruleSourcePrefix: '"*"'
-#         sshKeyName: SSHKey
-#         subnetAddress: 10.0.0.0/24
-#         vnetAddress: 10.0.0.0/16
-#         subnetName: subnet1
-#         vnetName: vnet1
-#         vmName: vm1
-#         vmImage: UbuntuLTS
 
     - name: Terraform INIT RGROUP
       run: terraform -chdir=$GITHUB_WORKSPACE/depRGROUP/ init
