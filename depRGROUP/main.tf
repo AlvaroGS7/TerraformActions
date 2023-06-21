@@ -21,10 +21,10 @@ terraform {
 provider "azurerm" {
   features {}
 
-  subscription_id   = __SUB_ID__
-  tenant_id         = __TEN_ID__
-  client_id         = __CLIENT_ID__
-  client_secret     = __CLIENT_SCRT__
+  subscription_id   = "__SUB_ID__"
+  tenant_id         = "__TEN_ID__"
+  client_id         = "__CLIENT_ID__"
+  client_secret     = "__CLIENT_SCRT__"
 }
 
 # Módulo Grupo de recursos.
