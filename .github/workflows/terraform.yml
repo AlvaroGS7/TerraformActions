@@ -80,13 +80,13 @@ jobs:
 #         vmImage: UbuntuLTS
 
     - name: Terraform INIT RGROUP
-      run: terraform init $GITHUB_WORKSPACE/depRGROUP/
+      run: terraform init -chdir=$GITHUB_WORKSPACE/depRGROUP/
 
     - name: Terraform PLAN RGROUP
-      run: terraform plan $GITHUB_WORKSPACE/depRGROUP/
+      run: terraform plan -chdir=$GITHUB_WORKSPACE/depRGROUP/
     
     - name: Terraform APPLY RGROUP
-      run: terraform apply $GITHUB_WORKSPACE/depRGROUP/ 
+      run: terraform apply -chdir=$GITHUB_WORKSPACE/depRGROUP/ 
 
     ###  WORK IN PROGRESS  ###
 #     - name: 'Terraform Init'
