@@ -79,6 +79,14 @@ jobs:
 #         vmName: vm1
 #         vmImage: UbuntuLTS
 
+    - name: Terraform INIT RGROUP
+      run: terraform init $GITHUB_WORKSPACE/depRGROUP/
+
+    - name: Terraform PLAN RGROUP
+      run: terraform plan $GITHUB_WORKSPACE/depRGROUP/
+    
+    - name: Terraform APPLY RGROUP
+      run: terraform apply $GITHUB_WORKSPACE/depRGROUP/ 
 
     ###  WORK IN PROGRESS  ###
 #     - name: 'Terraform Init'
