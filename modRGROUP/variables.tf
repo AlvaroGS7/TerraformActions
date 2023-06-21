@@ -1,5 +1,5 @@
 # Grupo y Location
-variable "groupname" {
+variable "groupName" {
   type        = string
 }
 
