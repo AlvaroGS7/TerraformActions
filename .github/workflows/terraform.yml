@@ -62,11 +62,11 @@ jobs:
         CLIENT_ID: ${{ secrets.CLIENT_ID }}
         CLIENT_SCRT: ${{ secrets.CLIENT_SCRT }}
 
-#     - name: Terraform INIT RGROUP
-#       run: terraform -chdir=$GITHUB_WORKSPACE/depRGROUP/ init
+    - name: Terraform INIT RGROUP
+      run: terraform -chdir=./depRGROUP/ init
 
-#     - name: Terraform PLAN RGROUP
-#       run: terraform -chdir=$GITHUB_WORKSPACE/depRGROUP/ plan
+    - name: Terraform PLAN RGROUP
+      run: terraform -chdir=./depRGROUP/ plan
     
-#     - name: Terraform APPLY RGROUP
-#       run: terraform -chdir=$GITHUB_WORKSPACE/depRGROUP/ apply
+    - name: Terraform APPLY RGROUP
+      run: terraform -chdir=./depRGROUP/ apply
