@@ -9,10 +9,10 @@ terraform {
   
   # Configuración de Backend
  backend "azurerm" {
-    resource_group_name  = var.staGroupName
-    storage_account_name = var.staName
-    container_name       = var.contName
-    key                  = var.keyName
+    resource_group_name  = "tfstaterookies"
+    storage_account_name = "tfstaterookies"
+    container_name       = "tfstaterookies"
+    key                  = "tf-actions-alvaro.tfstate"
  }
   required_version = ">= 1.1.0"
 }
@@ -26,6 +26,6 @@ provider "azurerm" {
 module "mod_rgroup" {
     source = "../modRGROUP"
 
-    rgroup = var.groupNAME
-    location = var.groupLocation
+    groupName = var.groupName
+    groupLocation = var.groupLocation
 }
