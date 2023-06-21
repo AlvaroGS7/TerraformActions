@@ -27,10 +27,14 @@ jobs:
       run: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
     
     # Azure SP login with secrets.
-    - name: Az Login
-      uses: azure/login@v1
-      with:
-          creds: '{"clientId":"${{ secrets.CLIENT_ID }}","clientSecret":"${{ secrets.CLIENT_SCRT }}","subscriptionId":"${{ secrets.SUB_ID }}","tenantId":"${{ secrets.TEN_ID }}"}'
+#     - name: Az Login
+#       uses: azure/login@v1
+#       with:
+#           creds: '{"clientId":"${{ secrets.CLIENT_ID }}","clientSecret":"${{ secrets.CLIENT_SCRT }}","subscriptionId":"${{ secrets.SUB_ID }}","tenantId":"${{ secrets.TEN_ID }}"}'
+    
+    # Azure login for User with secrets.
+#     - name: Azure User Login
+#       run: az login -u ${{ secrets.user }} -p ${{ secrets.passwd }}
     
     # Checkout
     - name: Checkout
@@ -38,46 +42,11 @@ jobs:
       
           # STA for Terraform TFSTATE
     - name: Azure CLI script file
-      uses: azure/CLI@v1
-      with:
-          azcliversion: 2.30.0
-          inlineScript: |
-            chmod +x $GITHUB_WORKSPACE/*.sh
-            $GITHUB_WORKSPACE/RGforTFSTATE.sh
-            $GITHUB_WORKSPACE/STAforTFSTATE.sh
-            $GITHUB_WORKSPACE/CONTforTFSTATE.sh
-            ls -l $GITHUB_WORKSPACE/depRGROUP/
-      
-    # Token Replacer Action
-    - name: Replace Tokens
-      uses: cschleiden/replace-tokens@v1
-      with:
-        tokenPrefix: '__'
-        tokenSuffix: '__'
-        files: '["**/*.tf"]'
-      env:
-      # Vars to replace key: value
-        groupName: agonzalez
-        groupLocation: westeurope
-#         nicName: nic1
-#         nsgName: nsg1
-#         pubIP: pubip1
-#         ruleAccessType: Allow
-#         ruleDestPort: 22
-#         ruleDestPrefix: '"*"'
-#         ruleDirection: INBOUND
-#         ruleName: SSHRule
-#         rulePriority: 101
-#         ruleProtocol: TCP
-#         ruleSourcePort: '"*"'
-#         ruleSourcePrefix: '"*"'
-#         sshKeyName: SSHKey
-#         subnetAddress: 10.0.0.0/24
-#         vnetAddress: 10.0.0.0/16
-#         subnetName: subnet1
-#         vnetName: vnet1
-#         vmName: vm1
-#         vmImage: UbuntuLTS
+      run: |
+        chmod +x $GITHUB_WORKSPACE/*.sh
+        $GITHUB_WORKSPACE/RGforTFSTATE.sh
+        $GITHUB_WORKSPACE/STAforTFSTATE.sh
+        $GITHUB_WORKSPACE/CONTforTFSTATE.sh
 
     - name: Terraform INIT RGROUP
       run: terraform -chdir=$GITHUB_WORKSPACE/depRGROUP/ init
@@ -87,28 +56,3 @@ jobs:
     
     - name: Terraform APPLY RGROUP
       run: terraform -chdir=$GITHUB_WORKSPACE/depRGROUP/ apply
-
-    ###  WORK IN PROGRESS  ###
-#     - name: 'Terraform Init'
-#       uses: hashicorp/terraform-github-actions@master
-#       with:
-#         tf_actions_version: 0.14.8
-#         tf_actions_subcommand: 'init'
-#         tf_actions_working_dir: "$GITHUB_WORKSPACE/depRGROUP/"
-         
-#     - name: 'Terraform Plan'
-#       uses: hashicorp/terraform-github-actions@master
-#       with:
-#         tf_actions_version: 0.14.8
-#         tf_actions_subcommand: 'plan'
-#         tf_actions_working_dir: "$GITHUB_WORKSPACE/depRGROUP/"
- 
-#     - name: Terraform Apply
-#       if: github.ref == 'refs/heads/main'
-#       uses: hashicorp/terraform-github-actions@master
-#       with:
-#         tf_actions_version: 0.14.8
-#         tf_actions_subcommand: 'apply'
-#         tf_actions_working_dir: "$GITHUB_WORKSPACE/depRGROUP/"
-      
-
