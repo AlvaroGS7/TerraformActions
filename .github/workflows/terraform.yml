@@ -55,7 +55,7 @@ jobs:
       with:
         tokenPrefix: '__'
         tokenSuffix: '__'
-        files: '["$GITHUB_WORKSPACE/depRGROUP/*.tf"]'
+        files: '["./depRGROUP/*.tf"]'
       env:
         SUB_ID: ${{ secrets.SUB_ID }}
         TEN_ID: ${{ secrets.TEN_ID }}
