@@ -27,14 +27,14 @@ jobs:
       run: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
     
     # Azure SP login with secrets.
-#     - name: Az Login
-#       uses: azure/login@v1
-#       with:
-#           creds: '{"clientId":"${{ secrets.CLIENT_ID }}","clientSecret":"${{ secrets.CLIENT_SCRT }}","subscriptionId":"${{ secrets.SUB_ID }}","tenantId":"${{ secrets.TEN_ID }}"}'
+    - name: Az Login
+      uses: azure/login@v1
+      with:
+          creds: '{"clientId":"${{ secrets.CLIENT_ID }}","clientSecret":"${{ secrets.CLIENT_SCRT }}","subscriptionId":"${{ secrets.SUB_ID }}","tenantId":"${{ secrets.TEN_ID }}"}'
     
     # Azure login for User with secrets.
-    - name: Azure User Login
-      run: az login -u ${{ secrets.user }} -p ${{ secrets.passwd }}
+#     - name: Azure User Login
+#       run: az login -u ${{ secrets.user }} -p ${{ secrets.passwd }}
     
     # Checkout
     - name: Checkout
@@ -62,11 +62,11 @@ jobs:
         CLIENT_ID: ${{ secrets.CLIENT_ID }}
         CLIENT_SCRT: ${{ secrets.CLIENT_SCRT }}
 
-    - name: Terraform INIT RGROUP
-      run: terraform -chdir=$GITHUB_WORKSPACE/depRGROUP/ init
+#     - name: Terraform INIT RGROUP
+#       run: terraform -chdir=$GITHUB_WORKSPACE/depRGROUP/ init
 
-    - name: Terraform PLAN RGROUP
-      run: terraform -chdir=$GITHUB_WORKSPACE/depRGROUP/ plan
+#     - name: Terraform PLAN RGROUP
+#       run: terraform -chdir=$GITHUB_WORKSPACE/depRGROUP/ plan
     
-    - name: Terraform APPLY RGROUP
-      run: terraform -chdir=$GITHUB_WORKSPACE/depRGROUP/ apply
+#     - name: Terraform APPLY RGROUP
+#       run: terraform -chdir=$GITHUB_WORKSPACE/depRGROUP/ apply
