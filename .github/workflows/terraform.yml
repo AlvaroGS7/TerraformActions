@@ -38,7 +38,7 @@ jobs:
 
     # Azure login for SP with secrets.
     - name: Azure SP Login
-      run: az login --service-principal -u ${{ secrets.USER }} -p ${{ secrets.PASSWD }} --tenant ${{ secrets.TEN_ID }}
+      run: az login --service-principal -u ${{ secrets.CLIENT_ID }} -p ${{ secrets.CLIENT_SCRT }} --tenant ${{ secrets.TEN_ID }}
     
     # Checkout
     - name: Checkout
